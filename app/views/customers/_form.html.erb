@@ -1,0 +1,31 @@
+<%= form_with model: @customer, local: true do |form| %>
+<%= render 'shared/error_messages', object:form.object %>
+<h2 class="h3 mb-3">顧客情報</h2>
+<div class="row">
+  <div class="col-md-6 mb-3">
+    <%= form.label :name, "氏名" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "", required: true %>
+  </div>
+  <div class="col-md-6 mb-3">
+    <%= form.label :furigana, "フリガナ" %>
+    <%= form.text_field :furigana, class: "form-control", placeholder: "", required: true %>
+  </div>
+</div>
+<hr class="mb-4">
+
+<h2 class="h3 mb-3">生徒情報</h2>
+<%= form.fields_for :students do |sform| %>
+<div class="row">
+  <div class="col-md-6 mb-3">
+    <%= sform.label :name, "氏名" %>
+    <%= sform.text_field :name , class: "form-control", placeholder: "" %>
+  </div>
+  <div class="col-md-6 mb-3">
+    <%= sform.label :furigana, "フリガナ" %>
+    <%= sform.text_field :furigana , class: "form-control", placeholder: "" %>
+  </div>
+</div>
+<hr class="mb-4">
+<% end %>
+<%= form.submit yield(:button_text), class: "btn btn-primary btn-lg btn-block" %>
+<% end %>

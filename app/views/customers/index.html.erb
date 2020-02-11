@@ -1,0 +1,36 @@
+<% provide(:title, "顧客・生徒の一覧") %>
+<h1 class="h2 mb-4">顧客・生徒の一覧</h1>
+<div class="text-right">
+  <%= link_to new_customer_path, class: "btn btn-outline-primary", role: "button" do%>
+  <i class="fas fa-user-plus fa-lg" data-toggle="tooltip" title="追加"></i>
+  <% end %>
+</div>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col"><i class="fas fa-user-tie fa-lg"></i>顧客</th>
+      <th scope="col"><i class="fas fa-child fa-lg"></i>生徒</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @customers.empty? %>
+    <tr><td colspan=2>顧客・生徒のデータがありません</td></tr>
+    <% else %>
+    <% @customers.each do |customer| %>
+    <% if customer.students.count == 0%>
+    <tr>
+      <td><%= link_to customer.name, customer, class: "text-body" %></td>
+      <td class="text-muted">no students </td>
+    </tr>
+    <% else %>
+    <% customer.students.order(:furigana).each_with_index do |student, index| %>
+    <tr>
+      <td><% if index == 0 %><%= link_to customer.name, customer, class: "text-body" %><% end %></td>
+      <td><%= link_to student.name, '#', class: "text-body" %></td>
+    </tr>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>

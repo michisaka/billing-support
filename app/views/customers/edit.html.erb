@@ -1,0 +1,9 @@
+<% provide(:title, @customer.name + "の編集") %>
+<% provide(:button_text, "更新する") %>
+<h1 class="h2 mb-4"><%= @customer.name + "の編集" %></h1>
+
+<div class="row">
+  <div class="col">
+    <%= render 'form' %>
+  </div>
+</div>
